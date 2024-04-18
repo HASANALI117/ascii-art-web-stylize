@@ -1,0 +1,70 @@
+{{template "header"}}
+
+<div class="container">
+  <h1 class="header">ASCII-ART</h1>
+  <form action="/ascii-art" method="post" class="space-y-4">
+    <textarea
+      name="input"
+      id=""
+      cols="30"
+      rows="10"
+      class="text-area"
+      required
+    ></textarea>
+    <div class="radio-container">
+      <label
+        ><input type="radio" name="font" value="standard" checked />
+        Standard</label
+      >
+      <label><input type="radio" name="font" value="shadow" /> Shadow</label>
+      <label
+        ><input type="radio" name="font" value="thinkertoy" /> Thinkertoy</label
+      >
+    </div>
+    <input type="submit" value="SUBMIT" class="dark-btn" />
+  </form>
+  <pre id="font-preview" class="preview">Hello</pre>
+</div>
+
+<script>
+  const fontPreviews = {
+    standard: `
+ _    _   ______   _        _         ____   
+| |  | | |  ____| | |      | |       / __ \  
+| |__| | | |__    | |      | |      | |  | | 
+|  __  | |  __|   | |      | |      | |  | | 
+| |  | | | |____  | |____  | |____  | |__| | 
+|_|  |_| |______| |______| |______|  \____/  
+
+`,
+    shadow: `
+                                             
+_|    _| _|_|_|_| _|       _|         _|_|   
+_|    _| _|       _|       _|       _|    _| 
+_|_|_|_| _|_|_|   _|       _|       _|    _| 
+_|    _| _|       _|       _|       _|    _| 
+_|    _| _|_|_|_| _|_|_|_| _|_|_|_|   _|_|   
+
+`,
+    thinkertoy: `                         
+o  o o--o o     o      o-o  
+|  | |    |     |     o   o 
+O--O O-o  |     |     |   | 
+|  | |    |     |     o   o 
+o  o o--o O---o O---o  o-o  
+
+`,
+  };
+
+  const radios = document.querySelectorAll('input[type=radio][name="font"]');
+  const preview = document.getElementById("font-preview");
+
+  // Set default preview to "shadow"
+  preview.innerHTML = fontPreviews["standard"];
+
+  radios.forEach((radio) =>
+    radio.addEventListener("change", () => {
+      preview.innerHTML = fontPreviews[radio.value];
+    })
+  );
+</script>
